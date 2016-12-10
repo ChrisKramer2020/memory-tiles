@@ -42,5 +42,6 @@
     "webpack-dev-server": "^1.16.2",
     "webpack-merge": "^1.0.2",
     "webpack-validator": "^2.2.11"
+    "yarn add json-loader --dev"
   }
 }

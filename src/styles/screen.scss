@@ -7,8 +7,58 @@ html {
   text-size-adjust: 100%;
 }
 
+h1 {
+  text-align: center;
+  animation-name: background;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  background-color: transparent;
+}
+
 body {
   @include font-smoothing(on);
   margin: 0;
   font: $base-text-size / 1 $base-font-family;
+  animation-name: background;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }
+
+table {
+  border-spacing: 10px;
+}
+
+tr {
+  background-color: transparent;
+}
+
+td {
+  width: 150px;
+  height: 100px;
+  border: solid 2px;
+  background-color: transparent;
+  background-image: url('https://tse1.mm.bing.net/th?&id=OIP.Mede8fd018b7a4f8c6115579ad52fc811H0&w=300&h=244&c=0&pid=1.9&rs=0&p=0&r=0'), ;
+  background-size: 100px;
+  background-repeat: no-repeat;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+    img {
+      background-color: transparent;
+    }
+}
+
+// @keyframes background {
+//  0% {background-color: rgb(55, 222, 149);}
+//  10% {background-color: rgb(202, 221, 52);}
+//  20% {background-color: rgb(55, 222, 149);}
+//  30% {background-color: rgb(31, 28, 23);}
+//  40% {background-color: rgb(55, 222, 149);}
+//  50% {background-color: rgb(202, 221, 52);}
+//  60% {background-color: rgb(55, 222, 149);}
+//  70% {background-color: rgb(31, 28, 23);}
+//  80% {background-color: rgb(226, 34, 57);}
+//  90% {background-color: rgb(31, 28, 23);}
+//  100% {background-color: rgb(55, 222, 149);
+//  }
+// }
