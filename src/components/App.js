@@ -1,15 +1,28 @@
+
 import React, { Component } from 'react'
-import images from '../images.json'
-//  import BoxItem from './BoxItem'
+// import imagesData from '../images.json'
+// import shuffle from 'array-shuffle'
+import BoxItem from './BoxItem'
 
 class App extends Component {
 
+  constructor () {
+    super()
+    this.state = {
+      matches: [],
+      picks: [],
+      won: false
+      // images: shuffle(imagesData)
+    }
+  }
+
   choose (card) {
-    console.log('hello', card)
+    if (this.state.picks.length === 2 || this.state.matches.includes(card)) { return }
     this.setState({
       picks: [...this.state.picks, card]
     }, () => {
-      if (this.state.picks.length === 2) {return} {
+      console.log(this.state.picks)
+      if (this.state.picks.length === 2) {
         this.check()
       }
     })
@@ -17,84 +30,59 @@ class App extends Component {
 
   check () {
     const picks = this.state.picks
-    if (images[picks[0]] === images[picks[1]]) {
+    if (this.state.images[picks[0]] === this.state.images[picks[1]]) {
       this.setState({
-        matches: [...this.state.matched, ...picks]
+        matches: [...this.state.matches, ...picks],
+        picks: []
+      }, () => {
+        if (this.state.matches.length === this.state.images.length) {
+          this.setState({
+            won: true
+          })
+        }
       })
-    }
-
-    console.log('CHECK')
-    setTimeout(() => {
-      this.setState({ picks: [] })
-    }, 3000)
-  }
-
-  constructor () {
-    super()
-    this.state = {
-      first: false
-      picks: []
-      matched: []
+    } else {
+      setTimeout(() => {
+        this.setState({ picks: [] })
+      }, 1000)
     }
   }
 
   render () {
-    // const items = leaf.
+    const picks = this.state.picks
+    const matches = this.state.matches
+    const images = this.state.images
     return <div>
-      <h1>Y u No SEizure?</h1>
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js' />
+      <h1>{this.state.won ? 'Yeah! You Member!' : 'Member?'}</h1>
       <table>
-        <tr id='first'>
-          <Card value={images[0]} first={false} handleClick={() => this.choose(0)} />
-          <Card value={images[1]} first={false} handleClick={() => this.choose(1)} />
-          <Card value={3} />
-          <Card value={4} />
-          <Card value={5} />
-        </tr>
-        <tr id='second'>
-          <Card value={6} />
-          <Card value={7} />
-          <Card value={8} />
-          <Card value={9} />
-          <Card value={10} />
-        </tr>
-        <tr id='third'>
-          <Card value={11} />
-          <Card value={12} />
-          <Card value={13} />
-          <Card value={14} />
-          <Card value={15} />
-        </tr>
-        <tr id='fourth'>
-          <Card value={16} />
-          <Card value={17} />
-          <Card value={18} />
-          <Card value={19} />
-          <Card value={20} />
-        </tr>
+        <tbody>
+          <tr>
+            <BoxItem image={images[0]} isUp={picks.includes(0) || matches.includes(0)} handleClick={() => this.choose(0)} />
+            <BoxItem image={images[1]} isUp={picks.includes(1) || matches.includes(1)} handleClick={() => this.choose(1)} />
+            <BoxItem image={images[2]} isUp={picks.includes(2) || matches.includes(2)} handleClick={() => this.choose(2)} />
+            <BoxItem image={images[3]} isUp={picks.includes(3) || matches.includes(3)} handleClick={() => this.choose(3)} />
+          </tr>
+          <tr>
+            <BoxItem image={images[4]} isUp={picks.includes(4) || matches.includes(4)} handleClick={() => this.choose(4)} />
+            <BoxItem image={images[5]} isUp={picks.includes(5) || matches.includes(5)} handleClick={() => this.choose(5)} />
+            <BoxItem image={images[6]} isUp={picks.includes(6) || matches.includes(6)} handleClick={() => this.choose(6)} />
+            <BoxItem image={images[7]} isUp={picks.includes(7) || matches.includes(7)} handleClick={() => this.choose(7)} />
+          </tr>
+          <tr>
+            <BoxItem image={images[8]} isUp={picks.includes(8) || matches.includes(8)} handleClick={() => this.choose(8)} />
+            <BoxItem image={images[9]} isUp={picks.includes(9) || matches.includes(9)} handleClick={() => this.choose(9)} />
+            <BoxItem image={images[10]} isUp={picks.includes(10) || matches.includes(10)} handleClick={() => this.choose(10)} />
+            <BoxItem image={images[11]} isUp={picks.includes(11) || matches.includes(11)} handleClick={() => this.choose(11)} />
+          </tr>
+          <tr>
+            <BoxItem image={images[12]} isUp={picks.includes(12) || matches.includes(12)} handleClick={() => this.choose(12)} />
+            <BoxItem image={images[13]} isUp={picks.includes(13) || matches.includes(13)} handleClick={() => this.choose(13)} />
+            <BoxItem image={images[14]} isUp={picks.includes(14) || matches.includes(14)} handleClick={() => this.choose(14)} />
+            <BoxItem image={images[15]} isUp={picks.includes(15) || matches.includes(15)} handleClick={() => this.choose(15)} />
+          </tr>
+        </tbody>
       </table>
     </div>
-  }
-}
-
-//  const images = [
-//    'https://openclipart.org/image/2400px/svg_to_png/249501/1464244342.png'
-//    'https://openclipart.org/image/2400px/svg_to_png/249501/1464244342.png'
-// ]
-
-class Card extends Component {
-
-  clickChangeImgSrc (card) {
-    console.log('You clicked me', card)
-  }
-
-
-  render () {
-    // const first = this.state.first
-    // onClick={() => this.props.handleClick()}
-    return <td onClick={e => this.clickChangeImgSrc(this.props.value)}>
-      {/* <img src={this.props.value} /> */}
-    </td>
   }
 }
 
