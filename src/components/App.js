@@ -48,12 +48,22 @@ class App extends Component {
     }
   }
 
+  reset () {
+    this.setState({
+      matched: [],
+      picks: [],
+      won: false,
+      images: shuffle(imagesData)
+    })
+  }
+
   render () {
     const picks = this.state.picks
     const matches = this.state.matches
     const images = this.state.images
     return <div>
-      <h1>{this.state.won ? 'Yeah! You Member!' : 'Member?'}</h1>
+      <h1>{this.state.won ? 'Yeah! You Won!' : 'Play!'}</h1>
+      <h2 className={this.reset} style={{ display: this.state.won ? 'block' : 'none' }}>Reset</h2>
       <table>
         <tbody>
           <tr>
